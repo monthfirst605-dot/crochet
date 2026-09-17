@@ -10,7 +10,7 @@ if (!email || !password) {
 }
 if (password.length < 10) { console.error("Use a password of at least 10 characters."); process.exit(1); }
 
-const ITERATIONS = 150_000;
+const ITERATIONS = 100_000;
 const salt = crypto.getRandomValues(new Uint8Array(16));
 const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
 const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations: ITERATIONS, hash: "SHA-256" }, key, 256);
