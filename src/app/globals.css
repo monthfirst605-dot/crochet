@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brown + beige ground, one saturated yellow doing all the pointing. */
+  --color-shell:    #f7f1e4;
+  --color-linen:    #ebdfc8;
+  --color-sand:     #dbc9ab;
+  --color-taupe:    #a98a67;
+  --color-bark:     #6b4a32;
+  --color-cocoa:    #2c1d14;
+  --color-sun:      #ffc300;
+  --color-sun-deep: #c98f00;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-karla), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-pebble: 1.75rem;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background-color: var(--color-shell);
+    color: var(--color-cocoa);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga";
+  }
+
+  ::selection { background: var(--color-sun); color: var(--color-cocoa); }
+
+  :focus-visible {
+    outline: 3px solid var(--color-sun-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+}
+
+@layer components {
+  /* Crochet edging. Sits under a section; --trim takes that section's colour. */
+  .trim {
+    height: 14px;
+    background-image: radial-gradient(
+      circle 13px at 14px 14px,
+      var(--trim, var(--color-shell)) 12.5px,
+      transparent 13px
+    );
+    background-size: 28px 28px;
+    background-repeat: repeat-x;
+    background-position: center top;
+  }
+
+  .link-sun {
+    background-image: linear-gradient(var(--color-sun), var(--color-sun));
+    background-repeat: no-repeat;
+    background-size: 100% 0.28em;
+    background-position: 0 88%;
+    transition: background-size 140ms ease;
+  }
+  .link-sun:hover { background-size: 100% 0.7em; }
+
+  .field {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--color-sand);
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-cocoa);
+  }
+  .field::placeholder { color: color-mix(in srgb, var(--color-taupe) 85%, white); }
+  .field:focus { border-color: var(--color-bark); }
+
+  .label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: var(--color-bark);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
