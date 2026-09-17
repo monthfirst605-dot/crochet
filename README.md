@@ -99,7 +99,7 @@ If your Node is older than 22, run the SQL directly instead:
 |---|---|
 | `DATABASE_URL` | Neon connection string. Use the **pooled** one (`-pooler` in the host). |
 | `AUTH_SECRET` | 32+ random characters. Signs the admin cookie. `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob, for photo uploads. Without it you can still paste image URLs in the admin form. |
+| `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PUBLIC_URL` | Cloudflare R2, for photo uploads. Without these you can still paste image URLs in the admin form. |
 | `NEXT_PUBLIC_WHATSAPP` | Country code + number, e.g. `919000000000`. |
 | `SHIPPING_FLAT_PAISE` | Flat shipping, default ₹99. |
 | `FREE_SHIPPING_OVER_PAISE` | Free above this subtotal, default ₹2,000. |
@@ -115,17 +115,19 @@ Adding a product: name, price and one photo are enough. Everything else —
 materials, care, size, colour choices — shows up on the product page only if you
 fill it in. Tick **Feature on home page** to put it on the front page.
 
-Photos go to Vercel Blob. To use S3, Cloudflare R2 or anything else, replace the
-one function in `src/lib/storage.ts`; nothing else touches storage.
+Photos go to Cloudflare R2 (S3-compatible). To use a different store, replace
+the one function in `src/lib/storage.ts`; nothing else touches storage.
 
 ## Deploying
 
-Vercel is the shortest path: import the repo, add the environment variables, add
-a Blob store, deploy. Neon's pooled connection string is what you want in
-production.
+Cloudflare Pages, via the OpenNext adapter (`@opennextjs/cloudflare`), since
+this app uses Server Actions and middleware that a plain static export can't
+run. Import the repo, set the build command to `npx @opennextjs/cloudflare build`,
+add the environment variables including the R2 ones above, create the R2
+bucket, deploy. Neon's pooled connection string is what you want in production.
 
-Netlify, Render, Fly or a plain `next start` on a VPS all work too — the only
-Vercel-specific piece is Blob storage, and that's one file.
+Vercel, Netlify, Render, Fly or a plain `next start` on a VPS all work too —
+nothing here is Cloudflare-specific except the storage function.
 
 ## What isn't built yet
 
