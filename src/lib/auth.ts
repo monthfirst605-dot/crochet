@@ -1,5 +1,5 @@
 // Pure Web Crypto — safe to import from middleware (edge) and from server code.
-const ITERATIONS = 150_000;
+const ITERATIONS = 100_000;
 const SESSION_DAYS = 7;
 
 function secret(): Uint8Array {
