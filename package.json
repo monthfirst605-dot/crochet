@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:cf": "npx @opennextjs/cloudflare build",
-    "preview:cf": "npx @opennextjs/cloudflare build && npx wrangler pages dev .open-next",
+    "build:worker": "npx opennextjs-cloudflare build",
+    "preview:worker": "npx opennextjs-cloudflare build && npx opennextjs-cloudflare preview",
+    "deploy:worker": "npx opennextjs-cloudflare build && npx wrangler deploy",
     "db:setup": "node --env-file=.env.local scripts/run-sql.mjs db/schema.sql",
     "db:seed": "node --env-file=.env.local scripts/run-sql.mjs db/seed.sql",
     "admin:create": "node --env-file=.env.local scripts/create-admin.mjs"
@@ -28,7 +29,7 @@
     "@types/react-dom": "^19.1.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.8.3",
-    "wrangler": "^3.90.0"
+    "wrangler": "^4.125.0"
   },
   "engines": { "node": ">=20.11" }
 }

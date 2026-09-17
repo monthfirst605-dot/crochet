@@ -120,10 +120,18 @@ the one function in `src/lib/storage.ts`; nothing else touches storage.
 
 ## Deploying
 
-Cloudflare Pages, via the OpenNext adapter (`@opennextjs/cloudflare`), since
-this app uses Server Actions and middleware that a plain static export can't
-run. Import the repo, set the build command to `npx @opennextjs/cloudflare build`,
-add the environment variables including the R2 ones above, create the R2
+Cloudflare **Workers**, via the OpenNext adapter (`@opennextjs/cloudflare`) — not
+Cloudflare Pages. Pages serves static files and can't run the Server Actions
+and middleware this app relies on for checkout and the admin panel; the
+adapter's build output (`.open-next/worker.js` plus `.open-next/assets`) is a
+Worker, which `wrangler.jsonc` in this repo is already set up for.
+
+In the Cloudflare dashboard: Workers & Pages → Create → **Import a Git
+repository** (this sets up "Workers Builds", Cloudflare's Git-connected CI for
+Workers — a different pipeline from Pages' Git integration, even though they
+sit in the same dashboard section). Set the build command to
+`npx opennextjs-cloudflare build` and the deploy command to `npx wrangler deploy`.
+Add the environment variables including the R2 ones above, create the R2
 bucket, deploy. Neon's pooled connection string is what you want in production.
 
 Vercel, Netlify, Render, Fly or a plain `next start` on a VPS all work too —

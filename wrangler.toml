@@ -1,9 +1,0 @@
-# Cloudflare Pages config for the OpenNext adapter.
-# Docs: https://opennext.js.org/cloudflare
-
-name = "moon-and-thread"
-compatibility_date = "2026-09-01"
-compatibility_flags = ["nodejs_compat"]
-
-# Where OpenNext writes the build Cloudflare actually serves.
-pages_build_output_dir = ".open-next"
