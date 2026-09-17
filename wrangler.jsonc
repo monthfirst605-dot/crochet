@@ -1,11 +1,20 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "moon-and-thread",
+  "name": "crochet",
   "compatibility_date": "2026-09-01",
   "compatibility_flags": ["nodejs_compat"],
   "main": ".open-next/worker.js",
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
+  },
+  "vars": {
+    "AUTH_SECRET": "11443929ce3d5c3d6090be92cdd1cdd88feefb93ead6bafd7e51b9f3516221bd",
+    "DATABASE_URL": "postgresql://neondb_owner:npg_VXtQLd7ygOG5@ep-gentle-night-b34cz940-pooler.c-4.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
+    "R2_ACCESS_KEY_ID": "b2695e9d93c60881904557c2775c8aed",
+    "R2_ACCOUNT_ID": "390d1fc7ff2ff960ac1b031d45d8f499",
+    "R2_BUCKET": "crochet",
+    "R2_PUBLIC_URL": "https://pub-28f2e7f6e72646c796b7913a01b9f871.r2.dev",
+    "R2_SECRET_ACCESS_KEY": "bc95b87c14c182661f299222de988229d0e1c95fe0abbd8b14382c2bef7e144a"
   }
 }
